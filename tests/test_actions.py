@@ -16,5 +16,10 @@ def test_all(local):
     prefixes = a.service_prefixes()
     assert all([prefix in prefixes for prefix in ["ec2", "comprehend", "s3"]])
 
+    assert a.actions("Amazon EC2") == a.actions("ec2")
+    assert "DescribeVolumes" in a.actions("Amazon EC2")
+    assert a.actions("Amazon S3") == a.actions("s3")
+    assert "PutObject" in a.actions("s3")
+
     svc_map = manifest(local=local)
     assert all([svc in svc_map["serviceMap"] for svc in test_svcs])

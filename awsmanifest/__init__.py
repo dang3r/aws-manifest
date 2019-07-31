@@ -64,6 +64,6 @@ class AwsManifest:
         accepted.
         """
         for k, v in self.service_map.items():
-            if svc == k or svc == k["StringPrefix"]:
+            if svc == k or svc == v["StringPrefix"]:
                 return v["Actions"]
         raise KeyError(svc)
